@@ -1,0 +1,12 @@
+---
+- name: install packages
+  hosts: group3
+  become: true
+  tasks:
+    - name: Install packages
+      package:
+        name: "{{item}}"
+        state: present
+      loop:
+        - htop
+        - atop
