@@ -1,0 +1,21 @@
+---
+- hosts: group1
+  vars:
+    - users: ignw
+  tasks:
+    - name: Check if file already exists
+      command: ls /home{{ user }}/lab-ansible/mjr_file
+      register: file_exists
+      ignore_errors: yes
+
+    - name: create file for user
+      file:
+        path: /home{{ user }}/lab-ansible/mjr_file
+        state: touch
+      when: file_exists is failed
+
+    - name: show message if file exists
+      debug:
+        msg: The user file already exists.
+      when: file_exists is succeeded
+
