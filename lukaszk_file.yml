@@ -1,16 +1,17 @@
 ---
-- hosts: group1
+- hosts: group3
   vars:
     - user: ignw
+  
   tasks:
   - name: Check if file already exists
-    command: ls /home/{{ user }}/lab-ansible/neils_file
+    command: ls /home/{{ user }}/lab-ansible/lukaszk_file
     register: file_exists
     ignore_errors: yes
 
   - name: create file for user
     file:
-      path: /home/{{ user }}/lab-ansible/neil_file
+      path: /home/{{ user }}/lab-ansible/lukaszk_file
       state: touch
     when: file_exists is failed
 
